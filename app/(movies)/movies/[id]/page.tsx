@@ -1,3 +1,20 @@
-export default function MovieDetail({ params }) {
-  return <h1>This is Movie Detail - {params.id}</h1>;
+import { Suspense } from "react";
+import MovieInfo from "../../../../components/movie-info";
+import MovieVideos from "../../../../components/movie-videos";
+
+export default async function MovieDetail({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  return (
+    <>
+      <Suspense fallback={<h1>Loading Movie Info</h1>}>
+        <MovieInfo id={id} />
+      </Suspense>
+      <Suspense fallback={<h1>Loading Movie Video</h1>}>
+        <MovieVideos id={id} />
+      </Suspense>
+    </>
+  );
 }
